@@ -27,8 +27,8 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     }
   });
@@ -36,7 +36,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   
   // Open DevTools in development
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

@@ -110,29 +110,52 @@ async function generateCalendar() {
 
 // Event Listeners
 addActivityButton.addEventListener('click', async () => {
-  const newCount = await window.electronAPI.addActivity();
-  updateActivityCounter(newCount);
-  await loadStreakInfo();
-  generateCalendar();
+  try {
+    const newCount = await window.electronAPI.addActivity();
+    updateActivityCounter(newCount);
+    await loadStreakInfo();
+    generateCalendar();
+    console.log('Activity added successfully');
+  } catch (error) {
+    console.error('Error adding activity:', error);
+  }
 });
 
 editNameButton.addEventListener('click', () => {
-  nameInput.value = userNameElement.textContent;
-  nameModal.classList.remove('hidden');
+  try {
+    nameInput.value = userNameElement.textContent;
+    nameModal.classList.remove('hidden');
+    console.log('Edit name modal opened');
+  } catch (error) {
+    console.error('Error opening edit name modal:', error);
+  }
 });
 
 saveNameButton.addEventListener('click', async () => {
-  const newName = nameInput.value.trim();
-  if (newName) {
-    await window.electronAPI.setUserName(newName);
-    userNameElement.textContent = newName;
-    nameModal.classList.add('hidden');
+  try {
+    const newName = nameInput.value.trim();
+    if (newName) {
+      await window.electronAPI.setUserName(newName);
+      userNameElement.textContent = newName;
+      nameModal.classList.add('hidden');
+      console.log('Name saved successfully');
+    }
+  } catch (error) {
+    console.error('Error saving name:', error);
   }
 });
 
 cancelNameButton.addEventListener('click', () => {
-  nameModal.classList.add('hidden');
+  try {
+    nameModal.classList.add('hidden');
+    console.log('Edit name modal closed');
+  } catch (error) {
+    console.error('Error closing edit name modal:', error);
+  }
 });
 
 // Initialize the app when the DOM is loaded
-document.addEventListener('DOMContentLoaded', initApp); 
+document.addEventListener('DOMContentLoaded', initApp);
+
+// Call initApp immediately as well, in case DOMContentLoaded already fired
+initApp(); 
