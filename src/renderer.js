@@ -108,6 +108,12 @@ async function generateCalendar() {
   }
 }
 
+// Function to close the modal
+function closeModal() {
+  nameModal.classList.add('hidden');
+  console.log('Modal closed');
+}
+
 // Event Listeners
 addActivityButton.addEventListener('click', async () => {
   try {
@@ -137,20 +143,26 @@ saveNameButton.addEventListener('click', async () => {
     if (newName) {
       await window.electronAPI.setUserName(newName);
       userNameElement.textContent = newName;
-      nameModal.classList.add('hidden');
-      console.log('Name saved successfully');
+      closeModal();
     }
   } catch (error) {
     console.error('Error saving name:', error);
   }
 });
 
-cancelNameButton.addEventListener('click', () => {
-  try {
-    nameModal.classList.add('hidden');
-    console.log('Edit name modal closed');
-  } catch (error) {
-    console.error('Error closing edit name modal:', error);
+cancelNameButton.addEventListener('click', closeModal);
+
+// Close modal when clicking outside of modal content
+nameModal.addEventListener('click', (event) => {
+  if (event.target === nameModal) {
+    closeModal();
+  }
+});
+
+// Add keyboard event to close modal with Escape key
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !nameModal.classList.contains('hidden')) {
+    closeModal();
   }
 });
 
