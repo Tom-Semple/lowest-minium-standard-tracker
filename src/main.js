@@ -26,17 +26,21 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    title: 'X Activity Tracker',
+    backgroundColor: '#000000',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    icon: path.join(__dirname, '../build/icon.png')
   });
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
   
   // Open DevTools in development
-  mainWindow.webContents.openDevTools();
+  // Comment this out for production
+  // mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

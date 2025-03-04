@@ -1,11 +1,14 @@
 {
-  "name": "lowest-minium-standard-tracker",
+  "name": "x-activity-tracker",
+  "productName": "X Activity Tracker",
   "version": "1.0.0",
   "description": "A simple desktop app to track daily X (Twitter) activities and maintain streaks",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -24,8 +27,24 @@
     "url": "https://github.com/Tom-Semple/lowest-minium-standard-tracker/issues"
   },
   "homepage": "https://github.com/Tom-Semple/lowest-minium-standard-tracker#readme",
+  "build": {
+    "appId": "com.tomsemple.xactivitytracker",
+    "productName": "X Activity Tracker",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icon.png",
+      "category": "Utility"
+    }
+  },
   "devDependencies": {
-    "electron": "^29.1.0"
+    "electron": "^29.1.0",
+    "electron-builder": "^24.9.1"
   },
   "dependencies": {
     "electron-store": "^8.1.0"
