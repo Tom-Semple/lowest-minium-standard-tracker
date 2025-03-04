@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-color: #f5f8fa;
+  color: #14171a;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+h1 {
+  color: #1da1f2;
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #657786;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#user-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.calendar-section {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+}
+
+.today-stats, .streak-info {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.counter-container {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 15px;
+}
+
+#activity-counter {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1da1f2;
+}
+
+.goal-text {
+  margin-left: 10px;
+  color: #657786;
+}
+
+.streak-counter {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 15px;
+}
+
+#streak-count {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff9500;
+}
+
+.days-text {
+  margin-left: 10px;
+  color: #657786;
+}
+
+.streak-message {
+  color: #657786;
+  font-size: 14px;
+}
+
+.progress-container {
+  height: 10px;
+  background-color: #e1e8ed;
+  border-radius: 5px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #1da1f2;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: #e1e8ed;
+}
+
+.calendar-day.completed {
+  background-color: #1da1f2;
+  color: white;
+}
+
+.calendar-day.today {
+  border: 2px solid #1da1f2;
+}
+
+.primary-button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.primary-button:hover {
+  background-color: #1a91da;
+}
+
+.secondary-button {
+  background-color: white;
+  color: #1da1f2;
+  border: 1px solid #1da1f2;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.secondary-button:hover {
+  background-color: #f5f8fa;
+}
+
+.small-button {
+  background-color: transparent;
+  color: #1da1f2;
+  border: 1px solid #1da1f2;
+  border-radius: 15px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.small-button:hover {
+  background-color: #f5f8fa;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e1e8ed;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+} 

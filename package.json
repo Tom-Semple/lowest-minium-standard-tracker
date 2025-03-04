@@ -1,0 +1,33 @@
+{
+  "name": "lowest-minium-standard-tracker",
+  "version": "1.0.0",
+  "description": "A simple desktop app to track daily X (Twitter) activities and maintain streaks",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tom-Semple/lowest-minium-standard-tracker.git"
+  },
+  "keywords": [
+    "tracker",
+    "streak",
+    "twitter",
+    "x",
+    "activities"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tom-Semple/lowest-minium-standard-tracker/issues"
+  },
+  "homepage": "https://github.com/Tom-Semple/lowest-minium-standard-tracker#readme",
+  "devDependencies": {
+    "electron": "^29.1.0"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0"
+  }
+} 

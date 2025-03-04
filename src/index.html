@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>X Activity Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>X Activity Tracker</h1>
+      <div class="user-info">
+        <span id="user-name">User</span>
+        <span id="fire-status" class="hidden">🔥</span>
+        <button id="edit-name" class="small-button">Edit</button>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div class="today-stats">
+        <h2>Today's Activities</h2>
+        <div class="counter-container">
+          <span id="activity-counter">0</span>
+          <span class="goal-text">/ 10 goal</span>
+        </div>
+        <button id="add-activity" class="primary-button">Add Activity</button>
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="streak-info">
+        <h2>Current Streak</h2>
+        <div class="streak-counter">
+          <span id="streak-count">0</span>
+          <span class="days-text">days</span>
+        </div>
+        <p class="streak-message">Complete 10 activities daily to maintain your streak!</p>
+      </div>
+
+      <div class="calendar-section">
+        <h2>Activity Calendar</h2>
+        <div id="calendar" class="calendar-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="name-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Edit Your Name</h2>
+      <input type="text" id="name-input" placeholder="Enter your name">
+      <div class="modal-buttons">
+        <button id="cancel-name" class="secondary-button">Cancel</button>
+        <button id="save-name" class="primary-button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html> 
