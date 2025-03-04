@@ -16,7 +16,7 @@ const calendarElement = document.getElementById('calendar');
 
 // Constants
 const GOAL_ACTIVITIES = 10;
-const DAYS_TO_SHOW = 28; // Show 4 weeks of activity
+const FUTURE_DAYS = 10; // Days to show in the future
 
 // Initialize the app
 async function initApp() {
@@ -70,43 +70,114 @@ function updateActivityCounter(count) {
   }
 }
 
-// Generate the calendar view - showing a continuous timeline
+// Generate the calendar view - showing all past days plus future days
 async function generateCalendar() {
   const activities = await window.electronAPI.getActivities();
   
   // Clear the calendar
   calendarElement.innerHTML = '';
   
-  // Generate a continuous timeline of days, starting from today and going back
   const today = new Date();
   
-  // Create a grid of days
-  for (let i = 0; i < DAYS_TO_SHOW; i++) {
-    const date = new Date();
-    date.setDate(today.getDate() - i);
-    const dateStr = date.toISOString().split('T')[0];
+  // Use a reasonable start date - 1 year ago
+  const startDate = new Date();
+  startDate.setFullYear(today.getFullYear() - 1);
+  
+  const endDate = new Date();
+  endDate.setDate(today.getDate() + FUTURE_DAYS); // 10 days into the future
+  
+  // Calculate total days to show
+  const daysDiff = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+  
+  // Create an array of all dates to display
+  const dates = [];
+  for (let i = 0; i < daysDiff; i++) {
+    const date = new Date(endDate);
+    date.setDate(endDate.getDate() - i);
+    dates.push(date);
+  }
+  
+  // Group dates by month and year
+  const groupedDates = {};
+  dates.forEach(date => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const key = `${year}-${month}`;
     
-    const dayElement = document.createElement('div');
-    dayElement.className = 'calendar-day';
-    
-    // Add the date number
-    dayElement.textContent = date.getDate();
-    
-    // Mark completed days
-    if (activities[dateStr] && activities[dateStr] >= GOAL_ACTIVITIES) {
-      dayElement.classList.add('completed');
+    if (!groupedDates[key]) {
+      groupedDates[key] = {
+        year,
+        month,
+        dates: []
+      };
     }
     
-    // Mark today
-    if (i === 0) {
-      dayElement.classList.add('today');
+    groupedDates[key].dates.push(date);
+  });
+  
+  // Sort keys by year and month (descending)
+  const sortedKeys = Object.keys(groupedDates).sort((a, b) => {
+    const [yearA, monthA] = a.split('-').map(Number);
+    const [yearB, monthB] = b.split('-').map(Number);
+    
+    if (yearA !== yearB) {
+      return yearB - yearA; // Most recent year first
     }
+    return monthB - monthA; // Most recent month first
+  });
+  
+  // Create month sections
+  for (const key of sortedKeys) {
+    const { year, month, dates } = groupedDates[key];
     
-    // Add activity count as a tooltip
-    const count = activities[dateStr] || 0;
-    dayElement.title = `${dateStr}: ${count} activities`;
+    // Create month header
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                        'July', 'August', 'September', 'October', 'November', 'December'];
     
-    calendarElement.appendChild(dayElement);
+    const monthHeader = document.createElement('div');
+    monthHeader.className = 'month-header';
+    monthHeader.textContent = `${monthNames[month]} ${year}`;
+    calendarElement.appendChild(monthHeader);
+    
+    // Create month container
+    const monthContainer = document.createElement('div');
+    monthContainer.className = 'month-container';
+    calendarElement.appendChild(monthContainer);
+    
+    // Add days for this month
+    for (const date of dates) {
+      const dateStr = date.toISOString().split('T')[0];
+      
+      const dayElement = document.createElement('div');
+      dayElement.className = 'calendar-day';
+      
+      // Format the date: Day (e.g., 15)
+      dayElement.textContent = date.getDate();
+      
+      // Mark completed days
+      if (activities[dateStr] && activities[dateStr] >= GOAL_ACTIVITIES) {
+        dayElement.classList.add('completed');
+      }
+      
+      // Mark today
+      const isToday = date.getDate() === today.getDate() && 
+                      date.getMonth() === today.getMonth() && 
+                      date.getFullYear() === today.getFullYear();
+      if (isToday) {
+        dayElement.classList.add('today');
+      }
+      
+      // Mark future days
+      if (date > today) {
+        dayElement.classList.add('future');
+      }
+      
+      // Add activity count as a tooltip
+      const count = activities[dateStr] || 0;
+      dayElement.title = `${dateStr}: ${count} activities`;
+      
+      monthContainer.appendChild(dayElement);
+    }
   }
 }
 
