@@ -1,28 +1,71 @@
-# Lowest Minimum Standard Tracker
+# X Activity Tracker
 
-A simple desktop app to track daily X (Twitter) activities and maintain streaks.
+A simple desktop application to track your daily X (Twitter) activities and maintain streaks.
+
+![X Activity Tracker Screenshot](screenshot.png)
 
 ## Features
 
-- Track daily X (Twitter) activities with a simple click
-- View your current day's activity count
-- Maintain a streak by completing at least 10 activities per day
-- Earn a fire emoji next to your name after a 10-day streak
-- Calendar view showing days where you achieved your goal
+- Track daily X activities
+- Set goals and maintain streaks
+- View your activity history in a calendar
+- Get streak status with fire indicator for 10+ day streaks
+- Dark mode interface matching X's design
 
 ## Installation
 
-1. Clone this repository
-2. Install dependencies with `npm install`
-3. Start the app with `npm start`
+### Download Pre-built App
+
+Coming soon!
+
+### Build from Source
+
+1. Clone this repository:
+```
+git clone https://github.com/Tom-Semple/lowest-minium-standard-tracker.git
+cd lowest-minium-standard-tracker
+```
+
+2. Install dependencies:
+```
+npm install
+```
+
+3. Run the app in development mode:
+```
+npm start
+```
+
+4. Build the app for your platform:
+```
+npm run dist
+```
+
+This will create distributable packages in the `dist` folder.
 
 ## Usage
 
-Simply click the "Add Activity" button each time you complete an activity on X (Twitter). The app will automatically track your daily progress and streaks.
+1. **Add Activities**: Click the "Add Activity" button to log an activity
+2. **Remove Activities**: Click the "Remove" button if you added too many
+3. **Edit Name**: Click the "Edit" button next to your name to personalize the app
+4. **View Calendar**: Scroll through the calendar to see your activity history
+5. **Reset Data**: Use the "Reset Data" button to clear all data (use with caution)
 
 ## Development
 
-This app is built with Electron and uses electron-store for persistent data storage.
+### Project Structure
+
+- `src/main.js` - Main Electron process
+- `src/preload.js` - Preload script for secure IPC
+- `src/renderer.js` - Renderer process (UI logic)
+- `src/index.html` - HTML structure
+- `src/styles.css` - CSS styling
+
+### Technologies Used
+
+- Electron
+- Electron Store (for data persistence)
+- HTML/CSS/JavaScript
 
 ## License
 
