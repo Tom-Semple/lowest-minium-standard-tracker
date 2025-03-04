@@ -6,5 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getUserName: () => ipcRenderer.invoke('get-user-name'),
   setUserName: (name) => ipcRenderer.invoke('set-user-name', name),
   addActivity: () => ipcRenderer.invoke('add-activity'),
-  getStreakInfo: () => ipcRenderer.invoke('get-streak-info')
+  removeActivity: () => ipcRenderer.invoke('remove-activity'),
+  getStreakInfo: () => ipcRenderer.invoke('get-streak-info'),
+  clearDatabase: () => ipcRenderer.invoke('clear-database')
 }); 

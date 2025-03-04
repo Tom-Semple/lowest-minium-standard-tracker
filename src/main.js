@@ -79,6 +79,19 @@ ipcMain.handle('add-activity', () => {
   return activities[today];
 });
 
+// Add a new handler to remove activities
+ipcMain.handle('remove-activity', () => {
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+  const activities = store.get('activities');
+  
+  if (activities[today] && activities[today] > 0) {
+    activities[today] -= 1;
+    store.set('activities', activities);
+  }
+  
+  return activities[today] || 0;
+});
+
 ipcMain.handle('get-streak-info', () => {
   const activities = store.get('activities');
   const today = new Date().toISOString().split('T')[0];
@@ -113,4 +126,14 @@ ipcMain.handle('get-streak-info', () => {
     hasFireStatus,
     hasCompletedToday
   };
+});
+
+// Add a handler to clear the database
+ipcMain.handle('clear-database', () => {
+  store.clear();
+  // Reinitialize with defaults
+  store.set('activities', {});
+  store.set('streakStartDate', '');
+  store.set('userName', 'User');
+  return true;
 }); 
