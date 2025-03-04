@@ -30,16 +30,12 @@
   "build": {
     "appId": "com.tomsemple.xactivitytracker",
     "productName": "X Activity Tracker",
-    "mac": {
-      "category": "public.app-category.productivity",
-      "icon": "build/icon.icns"
-    },
-    "win": {
-      "icon": "build/icon.ico"
-    },
-    "linux": {
-      "icon": "build/icon.png",
-      "category": "Utility"
+    "files": [
+      "src/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "resources"
     }
   },
   "devDependencies": {

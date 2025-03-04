@@ -32,8 +32,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
-    },
-    icon: path.join(__dirname, '../build/icon.png')
+    }
   });
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
